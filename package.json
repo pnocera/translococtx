@@ -17,7 +17,7 @@
     "commands": [
       {
         "command": "extension.transLocate",
-        "title": "Hello World"
+        "title": "Transloco helper..."
       }
     ],
     "menus": {
@@ -27,7 +27,23 @@
           "group": "YourGroup@1"
         }
       ]
-    }
+	},
+	"configuration" : {
+		"title" : "Transloco Helper",
+		"properties":{
+			"transloco.jsonrootfolder" : {
+				"type": "string",
+				"default" : "",
+				"description" : "The translation JSON files root folder"
+			},
+			"transloco.selectfirstlevelobjectkeys":{
+				"type": "boolean",
+				"default": true,
+				"description" : "Allow selection of first level object keys"
+			}
+		}
+
+	}
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
