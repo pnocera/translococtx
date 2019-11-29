@@ -2,7 +2,7 @@
   "name": "translococtx",
   "displayName": "TranslocoCtx",
   "description": "VSCode editor selection transloco helper",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "gcidev",
   "repository": { 
     "type": "github",
