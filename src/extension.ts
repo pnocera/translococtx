@@ -3,19 +3,24 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 
+export function trconfig() {
+  let config = vscode.workspace.getConfiguration("translococtx");
 
-
-
-export function config() {
-  return vscode.workspace.getConfiguration("translococtx");
+  return config;
 }
 
 export function GetTranlateFiles() {
-  let rootpath = config().get<string>("transloco.jsonrootfolder");
-  if (rootpath && rootpath !== "") {
-    return Promise.resolve(fs.readdirSync(rootpath));
+  let rootpath: any = undefined;
+  const config = trconfig();
+  if (config !== undefined) {
+    rootpath = config.get<string>("transloco.jsonrootfolder");
   }
-  let pr = vscode.workspace.findFiles("*.json").then(obj => {
+
+  if (rootpath === "" || rootpath === undefined) {
+    rootpath = "**/assets/i18n/**/*.json";
+  }
+
+  let pr = vscode.workspace.findFiles(rootpath).then(obj => {
     return obj.map(u => {
       return u.fsPath;
     });
@@ -24,7 +29,18 @@ export function GetTranlateFiles() {
 }
 
 export function PickKey(file: string) {
-  if (config().get("transloco.selectfirstlevelobjectkeys")) {
+  let dopick: any = true;
+
+  const config = trconfig();
+  if (config !== undefined) {
+    dopick = config.get<boolean>("transloco.selectfirstlevelobjectkeys");
+  }
+
+  if (dopick === undefined) {
+    dopick = true;
+  }
+
+  if (dopick) {
     let mainobj = JSON.parse(fs.readFileSync(file).toString());
     if (mainobj) {
       let keys = Object.keys(mainobj);
