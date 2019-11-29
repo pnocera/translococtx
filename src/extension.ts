@@ -3,24 +3,30 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 
-export function trconfig() {
+export async function trconfig() {
   let config = vscode.workspace.getConfiguration("translococtx");
 
-  return config;
+  return await config;
 }
 
-export function GetTranlateFiles() {
+export async function GetTranlateFiles() {
   let rootpath: any = undefined;
-  const config = trconfig();
+  let excluded: any = undefined;
+  const config = await trconfig();
   if (config !== undefined) {
     rootpath = config.get<string>("transloco.jsonrootfolder");
+    excluded = config.get<string>("transloco.excludefolders");
   }
 
   if (rootpath === "" || rootpath === undefined) {
     rootpath = "**/assets/i18n/**/*.json";
   }
 
-  let pr = vscode.workspace.findFiles(rootpath).then(obj => {
+  if (excluded === "" || excluded === undefined) {
+    excluded = "{dist,node_modules}";
+  }
+
+  let pr = vscode.workspace.findFiles(rootpath, excluded).then(obj => {
     return obj.map(u => {
       return u.fsPath;
     });
@@ -28,10 +34,10 @@ export function GetTranlateFiles() {
   return Promise.resolve(pr);
 }
 
-export function PickKey(file: string) {
+export async function PickKey(file: string) {
   let dopick: any = true;
 
-  const config = trconfig();
+  const config = await trconfig();
   if (config !== undefined) {
     dopick = config.get<boolean>("transloco.selectfirstlevelobjectkeys");
   }

@@ -2,7 +2,7 @@
   "name": "translococtx",
   "displayName": "TranslocoCtx",
   "description": "VSCode editor selection transloco helper",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "publisher": "gcidev",
   "repository": { 
     "type": "github",
@@ -34,12 +34,17 @@
       ]
 	},
 	"configuration" : {
-		"title" : "Transloco Helper",
+		"title" : "translococtx",
 		"properties":{
 			"transloco.jsonrootfolder" : {
 				"type": "string",
 				"default" : "**/assets/i18n/**/*.json",
 				"description" : "The translation JSON files path pattern"
+      },
+      "transloco.excludefolders" : {
+				"type": "string",
+				"default" : "{dist,nodemodules}",
+				"description" : "Excluded folders for translation JSON files search"
 			},
 			"transloco.selectfirstlevelobjectkeys":{
 				"type": "boolean",

@@ -14,8 +14,9 @@ A context menu in VSCode editor to convert the text selection to a transloco ent
 
 This extension contributes the following settings:
 
-* `transloco.jsonrootfolder`: The translation JSON files root folder
-* `transloco.selectfirstlevelobjectkeys`: Allow selection of first level object keys something
+* `transloco.jsonrootfolder`: Glob pattern to select json translation files
+* `transloco.excludefolders`: Glob patterns to exclude json translation files
+* `transloco.selectfirstlevelobjectkeys`: Allow selection of first level object keys 
 
 ## Known Issues
 
@@ -27,4 +28,8 @@ A lot
 ### 0.0.1
 
 Quick and not so dirty
+
+### 0.0.4
+
+Should work better
 
