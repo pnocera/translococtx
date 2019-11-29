@@ -3,6 +3,11 @@
   "displayName": "TranslocoCtx",
   "description": "VSCode editor selection transloco helper",
   "version": "0.0.1",
+  "publisher": "gcidev",
+  "repository": { 
+    "type": "github",
+    "url": "https://github.com/pnocera/translococtx"
+  },
   "engines": {
     "vscode": "^1.40.0"
   },
